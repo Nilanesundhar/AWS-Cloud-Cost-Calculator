@@ -6,7 +6,7 @@ Cloud cost calculator is a simple and interactive web-based cost estimation tool
 ### Features
 
 * User-friendly interface built with HTML, CSS, and JavaScript.
-* Dropdown-based service selection (EC2, S3, Lambda, DynamoDB).
+* Dropdown-based service selection (EC2, S3, Lambda).
 * Allows users to enter custom usage values.
 * Instantly calculates estimated monthly costs.
 * Deployed on Amazon S3 static website hosting for global access.
@@ -48,4 +48,5 @@ User Browser  →  Amazon S3 (Static Website) → IAM Policy for Access → API 
 ### Developer
 
 Nilani S
+
 
