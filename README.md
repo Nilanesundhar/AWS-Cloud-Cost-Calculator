@@ -22,14 +22,8 @@ Cloud cost calculator is a simple and interactive web-based cost estimation tool
 
 ### Architecture Diagram
 
-
-User Browser  →  Amazon S3 (Static Website)
-                        ↓
-                 IAM Policy for Access
-                        ↓
-                 API Gateway → AWS Lambda
-
-
+User Browser  →  Amazon S3 (Static Website) → IAM Policy for Access → API Gateway → AWS Lambda
+                        
 ### Tech Stack
 
 * Frontend: HTML, CSS, JavaScript
@@ -42,7 +36,7 @@ User Browser  →  Amazon S3 (Static Website)
 * User accesses the S3-hosted website via a public endpoint.
 * User selects AWS service and usage type.
 * JavaScript performs the cost calculation on the client side.
-* The result displays instantly — showing individual service costs and total monthly estimate. 
+* The result displays instantly to show individual service costs and total monthly estimate. 
 
 ### Future Enhancements
 
@@ -54,3 +48,4 @@ User Browser  →  Amazon S3 (Static Website)
 ### Developer
 
 Nilani S
+
