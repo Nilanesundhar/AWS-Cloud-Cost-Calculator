@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AWS Monthly Cost Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      color: #333;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #1e3a8a;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    select, input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      background-color: #2563eb;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+    }
+    button:hover {
+      background-color: #1d4ed8;
+    }
+    .result {
+      margin-top: 25px;
+      padding: 15px;
+      background: #ecfdf5;
+      border-left: 5px solid #10b981;
+      border-radius: 8px;
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+  <h1>💰 AWS Monthly Cost Calculator</h1>
+
+  <div class="container">
+    <label>Select AWS Service 1:</label>
+    <select id="service1">
+      <option value="">-- Select Service --</option>
+      <option value="ec2">EC2 (Compute Hours)</option>
+      <option value="s3">S3 (Storage GB)</option>
+      <option value="lambda">Lambda (Execution Seconds)</option>
+    </select>
+    <input type="number" id="usage1" placeholder="Enter usage amount">
+
+    <label>Select AWS Service 2:</label>
+    <select id="service2">
+      <option value="">-- Select Service --</option>
+      <option value="ec2">EC2 (Compute Hours)</option>
+      <option value="s3">S3 (Storage GB)</option>
+      <option value="lambda">Lambda (Execution Seconds)</option>
+    </select>
+    <input type="number" id="usage2" placeholder="Enter usage amount">
+
+    <label>Select AWS Service 3:</label>
+    <select id="service3">
+      <option value="">-- Select Service --</option>
+      <option value="ec2">EC2 (Compute Hours)</option>
+      <option value="s3">S3 (Storage GB)</option>
+      <option value="lambda">Lambda (Execution Seconds)</option>
+    </select>
+    <input type="number" id="usage3" placeholder="Enter usage amount">
+
+    <button type="button" id="calcBtn">Calculate Monthly Cost</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    const rates = {
+      ec2: 0.023,         // per hour
+      s3: 0.025,          // per GB
+      lambda: 0.00001667  // per second
+    };
+
+    function calculateCost(service, usage) {
+      if (!service || isNaN(usage) || usage <= 0) return 0;
+      return rates[service] * usage;
+    }
+
+    function calculateTotal() {
+      const s1 = document.getElementById("service1").value;
+      const s2 = document.getElementById("service2").value;
+      const s3 = document.getElementById("service3").value;
+
+      const u1 = parseFloat(document.getElementById("usage1").value) || 0;
+      const u2 = parseFloat(document.getElementById("usage2").value) || 0;
+      const u3 = parseFloat(document.getElementById("usage3").value) || 0;
+
+      const c1 = calculateCost(s1, u1);
+      const c2 = calculateCost(s2, u2);
+      const c3 = calculateCost(s3, u3);
+
+      const total = c1 + c2 + c3;
+
+      let output = "";
+      if (s1) output += `${s1.toUpperCase()} Cost: $${c1.toFixed(2)}<br>`;
+      if (s2) output += `${s2.toUpperCase()} Cost: $${c2.toFixed(2)}<br>`;
+      if (s3) output += `${s3.toUpperCase()} Cost: $${c3.toFixed(2)}<br>`;
+      if (total > 0) output += `<b>Total Monthly Estimate: $${total.toFixed(2)}</b>`;
+
+      document.getElementById("result").innerHTML = output || "⚠️ Please enter valid values!";
+    }
+
+    document.getElementById("calcBtn").addEventListener("click", calculateTotal);
+  </script>
+</body>
+</html>
